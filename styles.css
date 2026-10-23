@@ -1,0 +1,303 @@
+/* 1. Universal Variable Layout System Bases */
+:root {
+    --bg-base: #0c111d;
+    --bg-surface: #161b26;
+    --bg-nested: #1f242f;
+    --border-line: #252e3f;
+    --color-accent: #2f80ed;
+    --text-main: #f4f5f6;
+    --text-muted: #98a2b3;
+    --text-inactive: #667085;
+    --color-green: #22c55e;
+    --color-red: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    padding: clamp(12px, 2vw, 24px); /* Scales page margins dynamically based on view width */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+/* 2. Fluid Application Core Frame Container Configuration */
+.app-container {
+    display: grid;
+    grid-template-columns: 3.2fr 1.2fr; /* Flexible proportional column spacing structure */
+    gap: clamp(12px, 1.8vw, 20px);
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 1.8vw, 20px);
+    width: 100%;
+    min-width: 0; /* Prevents flex children elements from blowing past outer flex limits */
+}
+
+/* 3. Reusable Surface Panels Elements Cards Structure */
+.dashboard-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-line);
+    border-radius: 8px;
+    padding: clamp(14px, 2vw, 20px);
+    width: 100%;
+}
+
+/* 4. Adaptive Chart Segment Header Controllers Layout Configuration */
+.chart-controls-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Wraps items into multiple clean row rows if width narrows */
+    gap: 16px;
+}
+
+.title-block {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+#selected-stock-title {
+    font-size: clamp(1.8rem, 2.5vw, 2.4rem); /* Scales typography seamlessly between minimum and max parameters */
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.live-price-tag {
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.peak-low-tracker {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.metric-badge {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    background-color: var(--bg-nested);
+    white-space: nowrap;
+}
+.metric-badge.peak strong { color: var(--color-green); }
+.metric-badge.low strong { color: var(--color-red); }
+
+.time-range-buttons {
+    display: flex;
+    gap: 4px;
+    background-color: var(--bg-base);
+    padding: 4px;
+    border-radius: 6px;
+}
+
+.range-selector {
+    background: transparent;
+    border: none;
+    color: var(--text-inactive);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.15s ease-in-out;
+    white-space: nowrap;
+}
+
+.range-selector:hover {
+    color: var(--text-main);
+}
+
+.range-selector.active {
+    background-color: var(--color-accent);
+    color: #ffffff;
+}
+
+/* 5. Adaptive Self-Scaling Canvas Container Area */
+.chart-canvas-container {
+    position: relative;
+    height: clamp(280px, 40vh, 420px); /* Keeps heights perfectly proportional on short or ultrawide monitors */
+    width: 100%;
+}
+
+/* 6. Sidebar List Panel Structure Layout Configurations */
+.sidebar-list-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: clamp(550px, 80vh, 750px);
+    width: 100%;
+    min-width: 0;
+}
+
+.sidebar-list-panel h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-line);
+    padding-bottom: 8px;
+}
+
+.stock-scroll-list {
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 2px;
+}
+
+/* Custom Scrollbar configuration lines for clean visibility styling */
+.stock-scroll-list::-webkit-scrollbar {
+    width: 4px;
+}
+.stock-scroll-list::-webkit-scrollbar-thumb {
+    background-color: var(--border-line);
+    border-radius: 2px;
+}
+
+.stock-card-element {
+    width: 100%;
+    background-color: var(--bg-nested);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.stock-card-element:hover, .stock-card-element.active-item {
+    background-color: var(--border-line);
+    border-color: var(--color-accent);
+}
+
+.symbol-txt {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #ffffff;
+}
+
+.metrics-block {
+    text-align: right;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* 7. Overview Meta Panel Section Layout Component */
+.details-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-line);
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+#company-name-title {
+    font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+    color: #ffffff;
+}
+
+.metric-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.meta-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.meta-label strong {
+    color: #ffffff;
+    margin-left: 4px;
+}
+
+.summary-body {
+    font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* 8. Utility Target Theme Color States Frameworks */
+.profit-green { color: var(--color-green) !important; }
+.profit-red { color: var(--color-red) !important; }
+
+/* 9. Comprehensive Breakpoint Adaptive Media Queries */
+
+/* Tablet and Horizontal Medium Laptop Layout Transitions */
+@media (max-width: 1100px) {
+    .app-container {
+        grid-template-columns: 2.5fr 1.3fr; /* Readjusts columns ratio widths */
+    }
+}
+
+/* Small Laptop & Standard Tablet Breakpoints */
+@media (max-width: 900px) {
+    .app-container {
+        grid-template-columns: 1fr; /* Flattens columns into a clean unified stack column block sequence */
+    }
+    
+    .sidebar-list-panel {
+        max-height: 450px; /* Redresses standard containment bounds once stacked underneath */
+        order: 2; /* Forces list portfolio blocks down below main workspace displays */
+    }
+    
+    .main-content {
+        order: 1;
+    }
+}
+
+/* Mobile Devices Breakpoints */
+@media (max-width: 550px) {
+    body {
+        padding: 8px;
+    }
+    
+    .chart-controls-header {
+        flex-direction: column; /* Force stacks parameters vertically to save precious space grid lines */
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .time-range-buttons {
+        width: 100%;
+        justify-content: space-between; /* Spreads buttons edge-to-edge on compact screens */
+    }
+    
+    .range-selector {
+        flex: 1;
+        text-align: center;
+        padding: 6px 4px;
+        font-size: 0.8rem;
+    }
+    
+    .metric-group {
+        flex-direction: column;
+        gap: 4px;
+    }
+}

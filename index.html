@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Main Panel left side container -->
+        <div class="main-content">
+            <!-- Chart Section Component -->
+            <section id="chart-section" class="dashboard-card">
+                <div class="chart-controls-header">
+                    <div class="title-block">
+                        <h1 id="selected-stock-title">AAPL</h1>
+                        <span id="current-stock-price-display" class="live-price-tag">$0.00</span>
+                    </div>
+                    <!-- Peak and Low task tracking additions -->
+                    <div class="peak-low-tracker">
+                        <span class="metric-badge peak">Peak: <strong id="peak-price">--</strong></span>
+                        <span class="metric-badge low">Low: <strong id="low-price">--</strong></span>
+                    </div>
+                    <div class="time-range-buttons">
+                        <button class="range-selector active" data-range="1mo">1month</button>
+                        <button class="range-selector" data-range="3mo">3month</button>
+                        <button class="range-selector" data-range="1y">1year</button>
+                        <button class="range-selector" data-range="5y">5year</button>
+                    </div>
+                </div>
+                <div class="chart-canvas-container">
+                    <canvas id="stockVolumeChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Details Section Component (Positioned Below the Chart) -->
+            <section id="details-section" class="dashboard-card">
+                <div class="details-meta-row">
+                    <h2 id="company-name-title">Company Name</h2>
+                    <div class="metric-group">
+                        <span class="meta-label">Profit: <strong id="company-profit-val">--</strong></span>
+                        <span class="meta-label">Book Value: <strong id="company-book-val">--</strong></span>
+                    </div>
+                </div>
+                <div class="summary-body">
+                    <p id="company-summary-text">Loading company information tracking overview...</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- List Section Component (Positioned on the Right Side beside the Chart) -->
+        <aside class="sidebar-list-panel dashboard-card">
+            <h3>Stock Portfolio</h3>
+            <div id="stock-items-container" class="stock-scroll-list">
+                <!-- Appended dynamically via listSection.js -->
+            </div>
+        </aside>
+    </div>
+
+    <!-- Application Script Execution Layer Ordering -->
+    <script src="api.js"></script>
+    <script src="chartSection.js"></script>
+    <script src="detailSection.js"></script>
+    <script src="listSection.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
